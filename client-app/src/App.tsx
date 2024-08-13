@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import Button from './components/Button'
+import TodoForm from './components/TodoForm'
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           Learn React
         </a>
         <Button/>
+        <TodoForm/>
       </header>
     </div>
   );
