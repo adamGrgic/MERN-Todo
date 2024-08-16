@@ -1,28 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import Button from './components/Button'
-import TodoForm from './components/TodoForm'
-import './App.css';
+import React, { useState } from 'react';
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
+import TodoItem from './types/todo';
 
 function App() {
+  const [todos, setTodos] = useState<TodoItem[]>([]);
+
+  const addTodo = (todo: TodoItem) => {
+    setTodos([...todos, todo]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Button/>
-        <TodoForm/>
-      </header>
+    <div>
+      <TodoForm addTodo={addTodo} />
+      <TodoList todos={todos} />
     </div>
   );
 }
