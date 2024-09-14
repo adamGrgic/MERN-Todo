@@ -1,23 +1,30 @@
 import React, { useState } from 'react';
-import TodoItem from '../types/todo';
+import AddTodo from '../types/addTodo';
+import { v4 as uuidv4 } from 'uuid';
 
-function TodoForm({ addTodo }: { addTodo: (todo: TodoItem) => void }) {
+function TodoForm({ addTodo }: AddTodo) {
   const [titleInput, setTitleInput] = useState('');
   const [descriptionInput, setDescriptionInput] = useState('');
-  
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const dateCreated = new Date(Date.now());
-    addTodo({
-      id: 1,
-      title: titleInput,
-      description: descriptionInput,
-      isDone: false,
-      dateCreated: dateCreated
-    });
+  const cleanInput = () => {
     setTitleInput('');
     setDescriptionInput('');
+  }
+  
+  const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+
+      const dateCreated = new Date(Date.now());   
+      
+      addTodo({
+        id: uuidv4(),
+        title: titleInput,
+        description: descriptionInput,
+        isDone: false,
+        dateCreated: dateCreated
+      });
+      
+      cleanInput();
     }
   
     return (
@@ -39,9 +46,6 @@ function TodoForm({ addTodo }: { addTodo: (todo: TodoItem) => void }) {
     );
   
   };
-
-  
-
 
 export default TodoForm;
 
